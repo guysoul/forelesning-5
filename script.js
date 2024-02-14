@@ -43,6 +43,18 @@ function showAllStaff() {
       deleteStaffMember(index);
     });
 
+    //Rediger-Edit
+    const nameInput = document.createElement("input");
+    nameInput.type = "text";
+    nameInput.placeholder = "Skriv inn navn på ansatt...";
+    nameInput.id = `nameInput-${index}`;
+
+    const editBtn = document.createElement("button");
+    editBtn.innerHTML = "Redigere ansatt";
+    editBtn.addEventListener("click", function () {
+      editStaffMember(index);
+    });
+
     staffCard.innerHTML = `<img src="${staffMember.image}" style="width: 100px"/> <h3>${staffMember.name}</h3>`;
     console.log(staffMember.name);
     staffCard.append(deleteBtn);
@@ -66,3 +78,12 @@ function addStaffMember() {
 }
 
 addBtn.onclick = addStaffMember;
+
+//Edit
+function editStaffMember(index) {
+  const newstaffName = document.getElementById(`nameInput-${index}`).value;
+
+  hogwartsStaff[index].name = newstaffName;
+
+  showAllStaff();
+}
