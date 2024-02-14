@@ -31,14 +31,38 @@ fetchAndShowStaff();
 
 //Read for å vise frem alle ansatte
 function showAllStaff() {
+  staffContainer.innerHTML = "";
   hogwartsStaff.forEach((staffMember, index) => {
     const staffCard = document.createElement("div");
 
-    //Slett/Delete
+    //Slett-Delete
     const deleteBtn = document.createElement("button");
+    deleteBtn.innerHTML = "Slett ansatt";
+    deleteBtn.style.backgroundColor = "red";
+    deleteBtn.addEventListener("click", function () {
+      deleteStaffMember(index);
+    });
 
     staffCard.innerHTML = `<img src="${staffMember.image}" style="width: 100px"/> <h3>${staffMember.name}</h3>`;
     console.log(staffMember.name);
+    staffCard.append(deleteBtn);
     staffContainer.append(staffCard);
   });
 }
+
+function deleteStaffMember(index) {
+  //console.log("Inne i slettfunksjonen");
+  hogwartsStaff.splice(index, 1);
+  //console.log("etter sletting", hogwartsStaff);
+  showAllStaff();
+}
+
+//Create
+function addStaffMember() {
+  hogwartsStaff.unshift({
+    name: newStaffTxt.value,
+  });
+  showAllStaff();
+}
+
+addBtn.onclick = addStaffMember;
